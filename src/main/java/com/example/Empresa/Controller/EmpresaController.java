@@ -4,6 +4,7 @@ import com.example.Empresa.Entity.Empresa;
 import com.example.Empresa.Service.EmpresaService;
 import com.example.Empresa.dto.EmpresaDto;
 import com.rabbitmq.client.Return;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,7 @@ public class EmpresaController {
 
     @GetMapping
     public ResponseEntity<List<Empresa>> list() {
+
         return ResponseEntity.ok(empresaService.list());
     }
 
@@ -37,6 +39,6 @@ public class EmpresaController {
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         empresaService.delete(id);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
